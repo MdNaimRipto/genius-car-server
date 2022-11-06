@@ -40,10 +40,16 @@ const run = async () => {
         })
 
         app.get("/services", async (req, res) => {
-            const query = {}
-            const cursor = geniusCarCollection.find(query)
-            const services = await cursor.toArray()
-            res.send(services)
+            try {
+                const query = {}
+                const cursor = geniusCarCollection.find(query)
+                const services = await cursor.toArray()
+                res.send(services)
+            }
+            catch (error) {
+                res.send(error.message)
+            }
+
         })
 
         app.get('/services/:id', async (req, res) => {
